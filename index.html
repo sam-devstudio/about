@@ -63,6 +63,28 @@
     <p>📍 Pakistan | 📞 (+92) 332—---- | 📧 xyz@gmail.com | 🔗 <a href="#" style="color: #4ecdc4;">LinkedIn</a></p>
   </header>
 
+  <script>
+        window.onload = function () {
+          const offerId = new URLSearchParams(window.location.search).get("offerId") || "default";
+          const packageName = "com.flooss.qa";
+          const intentPath = `/open/offer/${offerId}`;
+          const intentUri = `intent://${intentPath}#Intent;scheme=https;package=${packageName};end`;
+          const fallbackUrl = `https://play.google.com/store/apps/details?id=${packageName}`;
+
+          const isAndroid = /Android/i.test(navigator.userAgent);
+          const isChrome = /Chrome/i.test(navigator.userAgent);
+
+          if (isAndroid && isChrome) {
+            window.location = intentUri;
+            setTimeout(() => {
+              window.location = fallbackUrl;
+            }, 1500);
+          } else {
+            window.location = fallbackUrl;
+          }
+        };
+    </script>
+
   <section>
     <h2>About Me</h2>
     <p>I’m a seasoned Mobile App Developer with over 8 years of experience building Android, iOS, and Cross-Platform (React Native) applications. I specialize in creating scalable and robust apps using Java, Kotlin, Jetpack, Spring Boot, and CI/CD pipelines.</p>
